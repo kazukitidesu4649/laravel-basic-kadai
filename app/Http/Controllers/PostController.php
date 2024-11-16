@@ -23,28 +23,18 @@ class PostController extends Controller
 
     }
 
+    // store アクションの追加 引数にRequest $requestの型宣言を行う。
     public function store(Request $request) {
-        dd($request);
-        // HTTPリクエストに含まれる、単一のパラメータの値を取得する
-        $title = $request->input('title');
-        $content = $request->input('content');
+        // $requestの情報をバリデーションにかける
+        $request->validate([
+            'title' => 'required|max:20',
+            'content' => 'required|max:200'
+        ]);
 
-        // HTTPリクエストメソッド(GET,POST,PUT,PATCH,DELETE)を取得する
-        $method = $request->method();
-
-        // HTTPリクエストのパスを取得する
-        $path = $request->path();
-
-        // HTTPリクエストのURLを取得する
-        $url = $request->url();
-
-        // HTTPリクエストを送信したクライアントのIPアドレスを取得する
-        $ip = $request->ip();
-
-        $variables = [
-            'title',
-            'content'
-        ];
+        $post = new posts();
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post->save();
 
         return redirect()->route('posts.index');
     }
