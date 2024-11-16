@@ -13,16 +13,18 @@ class PostController extends Controller
         $posts = DB::table('posts')->select('title','content')->get();
         return view('posts.index', compact('posts'));
     }
-        public function show($id) {
+    public function show($id) {
             $post = posts::find($id);
             return view('posts.show', compact('post'));
         }
 
     public function create() {
-        return view('requests.create');
+        return view('posts.create');
+
     }
 
     public function store(Request $request) {
+        dd($request);
         // HTTPリクエストに含まれる、単一のパラメータの値を取得する
         $title = $request->input('title');
         $content = $request->input('content');
@@ -44,6 +46,6 @@ class PostController extends Controller
             'content'
         ];
 
-        return view('requests.confirm', compact($variables));
+        return redirect()->route('posts.index');
     }
 }

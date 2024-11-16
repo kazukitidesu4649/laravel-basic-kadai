@@ -14,11 +14,12 @@
           <ul>
               @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
+              @endforeach
           </ul>
       </div>
     @endif
 
-    <form action="{{ route('vendors.store') }}" method="POST">
+    <form action="{{ route('posts.store') }}" method="POST">
         @csrf
         <table>
             <tr>
