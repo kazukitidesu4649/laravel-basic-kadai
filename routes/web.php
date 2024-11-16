@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\StoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,5 @@ Route::get('/', function () {
 Route::get('/hello', [HelloController::class, 'index']);
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{id}', [PostController::class, 'show']);
+Route::get('/requests/create', [PostController::class, 'create']);
+Route::POST('/requests/confirm', [PostController::class, 'confirm'])->name('requests.confirm');

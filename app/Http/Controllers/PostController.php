@@ -17,4 +17,33 @@ class PostController extends Controller
             $post = posts::find($id);
             return view('posts.show', compact('post'));
         }
+
+    public function create() {
+        return view('requests.create');
+    }
+
+    public function store(Request $request) {
+        // HTTPリクエストに含まれる、単一のパラメータの値を取得する
+        $title = $request->input('title');
+        $content = $request->input('content');
+
+        // HTTPリクエストメソッド(GET,POST,PUT,PATCH,DELETE)を取得する
+        $method = $request->method();
+
+        // HTTPリクエストのパスを取得する
+        $path = $request->path();
+
+        // HTTPリクエストのURLを取得する
+        $url = $request->url();
+
+        // HTTPリクエストを送信したクライアントのIPアドレスを取得する
+        $ip = $request->ip();
+
+        $variables = [
+            'title',
+            'content'
+        ];
+
+        return view('requests.confirm', compact($variables));
+    }
 }
