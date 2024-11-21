@@ -31,9 +31,13 @@ class PostController extends Controller
             'content' => 'required|max:200'
         ]);
 
+        // 新しいpostをインスタンス化
         $post = new posts();
+        // 入力されたタイトルを保存
         $post->title = $request->input('title');
+        // 入力された本文を保存
         $post->content = $request->input('content');
+        // 保存されたタイトル、本文を保存
         $post->save();
 
         return redirect()->route('posts.index');
